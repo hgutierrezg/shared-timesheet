@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.hgutierrezg.training")
-public class SharedTimesheetConfiguration implements WebMvcConfigurer {
+public class WebMvcConfiguration implements WebMvcConfigurer {
      
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {

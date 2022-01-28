@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @Slf4j
 @ControllerAdvice
-public class RestException extends ResponseEntityExceptionHandler {
+public class RestControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class})
     public final ResponseEntity<?> handleRuntimeException(Exception ex, WebRequest request) {

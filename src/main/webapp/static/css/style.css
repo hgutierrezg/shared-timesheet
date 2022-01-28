@@ -1,6 +1,7 @@
-
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 1500px}
+.row.content {
+    height: 1500px
+}
 
 a:active {
     background-color: black;
@@ -12,8 +13,8 @@ a:active {
     height: 100%;
 }
 
-.fixSize {
-        width: 60px;
+.approveBtn {
+    width: 60px;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -22,5 +23,8 @@ a:active {
         height: auto;
         padding: 15px;
     }
-    .row.content {height: auto;}
+
+    .row.content {
+        height: auto;
+    }
 }

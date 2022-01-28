@@ -1,68 +1,38 @@
 package com.hgutierrezg.training.service;
 
-import java.util.List;
-
 import com.hgutierrezg.training.model.Timesheet;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicLong;
-
+import com.hgutierrezg.training.repository.TimesheetRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
+@AllArgsConstructor
 public class TimesheetService {
+    private final TimesheetRepository timesheetRepository;
 
-    private static final AtomicLong counter = new AtomicLong();
-
-    private static List<Timesheet> timesheets;
-
-    static{
-        timesheets = createMockedTimesheets();
-    }
-
-    public void saveTimesheet(Timesheet timesheet) {
-        timesheet.setId(counter.incrementAndGet());
-        timesheets.add(timesheet);
+    public Long createTimesheet(Timesheet timesheet) {
+        return this.upsert(timesheet).getId();
     }
 
     public void updateTimesheet(Timesheet timesheet) {
-        Timesheet currentTimesheet = findById(timesheet.getId());
-
-        if (currentTimesheet != null){
-            int index = timesheets.indexOf(timesheet);
-            if (index != -1){
-                timesheets.set(index, timesheet);
-            }
-        }
-    }
-
-    private Timesheet findById(long id) {
-        for(Timesheet user : timesheets){
-            if(user.getId() == id){
-                return user;
-            }
-        }
-        return null;
+        this.upsert(timesheet);
     }
 
     public List<Timesheet> getTimesheets() {
-
-        return timesheets;
+        return timesheetRepository.getAll();
     }
 
-    private static List<Timesheet> createMockedTimesheets(){
-        List<Timesheet> timesheets = new ArrayList<>();
-
-        for (int i = 0; i<= 3; i++){
-            timesheets.add(
-                    Timesheet.builder()
-                            .id(counter.incrementAndGet())
-                            .approved(false)
-                            .startDateTime(LocalDateTime.of(2022, 1, i + 3, 0, 0))
-                            .endDateTime(LocalDateTime.of(2022, 1, i + 7, 0, 0)).build()
-            );
+    private Timesheet upsert(Timesheet timesheet) {
+        Optional<Timesheet> timesheetOptional = timesheetRepository.getById(timesheet.getId());
+        if (timesheetOptional.isPresent()) {
+            timesheetRepository.update(timesheet);
+        } else {
+            timesheetRepository.save(timesheet);
         }
-        return timesheets;
+        return timesheet;
     }
+
 }

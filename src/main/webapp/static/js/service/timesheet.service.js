@@ -8,12 +8,11 @@ timesheetService.$inject = ['$http', '$q'];
 
 function timesheetService($http, $q) {
 
-    const REST_SERVICE_URI = 'http://localhost:8080/shared-timesheet/times/';
+    const HOST_URI = 'http://localhost:8080/';
+    const REST_SERVICE_URI = HOST_URI + 'shared-timesheet/times/';
 
     return {
-        getAllTimesheets: getAllTimesheets,
-        createTimesheet: createTimesheet,
-        updateTimesheet:updateTimesheet
+        getAllTimesheets: getAllTimesheets, createTimesheet: createTimesheet, updateTimesheet: updateTimesheet
     };
 
     function getAllTimesheets() {
@@ -33,30 +32,24 @@ function timesheetService($http, $q) {
     function createTimesheet(timesheet) {
         const deferred = $q.defer();
         $http.post(REST_SERVICE_URI, timesheet)
-            .then(
-                function (response) {
-                    deferred.resolve(response.data);
-                },
-                function(errResponse){
-                   console.error('Error while creating Timesheet');
-                   deferred.reject(errResponse);
-                }
-            );
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errResponse) {
+                console.error('Error while creating Timesheet');
+                deferred.reject(errResponse);
+            });
         return deferred.promise;
     }
 
-        function updateTimesheet(timesheet) {
-            const deferred = $q.defer();
-            $http.put(REST_SERVICE_URI, timesheet)
-            .then(
-                function (response) {
-                    deferred.resolve(response.data);
-                },
-                function(errResponse){
-                   console.error('Error while updating Timesheet');
-                   deferred.reject(errResponse);
-                }
-            );
-       return deferred.promise;
+    function updateTimesheet(timesheet) {
+        const deferred = $q.defer();
+        $http.put(REST_SERVICE_URI, timesheet)
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errResponse) {
+                console.error('Error while updating Timesheet');
+                deferred.reject(errResponse);
+            });
+        return deferred.promise;
     }
 }

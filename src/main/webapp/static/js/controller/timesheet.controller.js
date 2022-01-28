@@ -1,12 +1,13 @@
+/**
+ * Creating controller only inside sharedTimesheetApp module,
+ * so the controller does not become a global function
+ */
 'use strict';
 
-/**
- * Creating controller only inside sharedTimesheetApp module, so the controller does not become a global function
- */
-angular.module('sharedTimesheetApp').controller(
-    'TimesheetController', ['$scope', 'timesheetService', function($scope, timesheetService) {
+angular.module('sharedTimesheetApp')
+    .controller('TimesheetController', ['timesheetService', function(timesheetService) {
 
-        var timesheetController = this;
+        const timesheetController = this;
         timesheetController.timesheet = {startDateTime: '', endDateTime: ''};
 
         timesheetController.timesheets = [];
@@ -16,7 +17,6 @@ angular.module('sharedTimesheetApp').controller(
         timesheetController.approve = approve;
         timesheetController.reset = reset;
         timesheetController.menuSelection = menuSelection;
-        timesheetController.displayApproveButton = timesheetController;
 
         getAllTimesheets();
 
@@ -33,7 +33,6 @@ angular.module('sharedTimesheetApp').controller(
         }
 
         function createTimesheet(timesheet) {
-
             timesheet.startDateTime = new Date(timesheet.startDateTime).toLocaleString("sv-SE");
             timesheet.endDateTime = new Date(timesheet.endDateTime).toLocaleString("sv-SE");
             timesheetService.createTimesheet(timesheet)
@@ -70,11 +69,9 @@ angular.module('sharedTimesheetApp').controller(
                 startDateTime: '',
                 endDateTime: ''
             };
-            // $scope.myForm.$setPristine();
         }
 
         function menuSelection(selected) {
-            console.log('value for selected ' + selected);
             timesheetController.role = selected;
         }
     }

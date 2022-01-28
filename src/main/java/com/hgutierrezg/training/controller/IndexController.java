@@ -14,6 +14,6 @@ public class IndexController {
      */
       @RequestMapping(method = RequestMethod.GET)
         public String getIndexPage() {
-            return "home";
+            return "timesheet";
         }
 }

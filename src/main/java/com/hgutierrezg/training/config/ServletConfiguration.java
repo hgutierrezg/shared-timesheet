@@ -4,13 +4,13 @@ import javax.servlet.Filter;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import filters.CORSFilter;
+import filters.CorsFilter;
 
-public class SharedTimesheetInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class ServletConfiguration extends AbstractAnnotationConfigDispatcherServletInitializer {
 	  
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { SharedTimesheetConfiguration.class };
+        return new Class[] { WebMvcConfiguration.class };
     }
    
     @Override
@@ -25,7 +25,7 @@ public class SharedTimesheetInitializer extends AbstractAnnotationConfigDispatch
      
     @Override
     protected Filter[] getServletFilters() {
-        return new CORSFilter[]{new CORSFilter()};
+        return new CorsFilter[]{new CorsFilter()};
     }
   
 }
