@@ -24,8 +24,8 @@ Contractor Manager    : View the approved timesheets
     -Apache Tomcat Maven Plugin to run Tomcat as the application server
     
 ## How to run   
-    -Navigate to project root folder and run command in terminal:
+    -Navigate to project root folder and run command in terminal mvn:tomcat7:run
+    -In the browser go to: http://localhost:8080/shared-timesheet/
 
-     mvn:tomcat7:run
 
         
