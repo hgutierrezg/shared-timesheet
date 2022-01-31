@@ -2,7 +2,7 @@
 
 angular
     .module('sharedTimesheetApp')
-    .factory('timesheetService', timesheetService);
+    .service('timesheetService', timesheetService);
 
 timesheetService.$inject = ['$http', '$q'];
 

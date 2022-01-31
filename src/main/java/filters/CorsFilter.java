@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
         res.setHeader("Access-Control-Max-Age", "3600");
         res.setHeader("Access-Control-Allow-Headers", "X-requested-with, Content-Type");
         chain.doFilter(request, res);
-		
 	}
  
 }

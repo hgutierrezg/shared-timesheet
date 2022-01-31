@@ -55,4 +55,4 @@ function TimesheetListController (timesheetService, $scope) {
     $scope.$on("timesheetCreated", function (evt) {
         getAllTimesheets();
     });
-};
+}
