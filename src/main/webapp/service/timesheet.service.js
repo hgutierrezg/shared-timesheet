@@ -12,7 +12,9 @@ function timesheetService($http, $q) {
     const REST_SERVICE_URI = HOST_URI + 'shared-timesheet/times/';
 
     return {
-        getAllTimesheets: getAllTimesheets, createTimesheet: createTimesheet, updateTimesheet: updateTimesheet
+        getAllTimesheets: getAllTimesheets,
+        createTimesheet: createTimesheet,
+        updateTimesheet: updateTimesheet
     };
 
     function getAllTimesheets() {

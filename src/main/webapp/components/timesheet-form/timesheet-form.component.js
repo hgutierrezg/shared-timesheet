@@ -25,7 +25,7 @@ function TimesheetFormController (timesheetService, $rootScope) {
         timesheet.endDateTime = new Date(timesheet.endDateTime).toLocaleString("sv-SE");
         timesheetService.createTimesheet(timesheet)
             .then(
-                timesheetCreated(),
+                timesheetCreated,
                 function (errResponse) {
                     console.error('Error while creating timesheet with error ' + errResponse);
                 }
