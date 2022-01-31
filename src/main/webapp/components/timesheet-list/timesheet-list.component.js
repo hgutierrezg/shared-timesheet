@@ -27,7 +27,6 @@ function TimesheetListController (timesheetService, $scope) {
                 .then(
                     function (response) {
                         timesheetController.timesheets = response;
-                        console.log('results with timesheet list ' + timesheetController.timesheets);
                     },
                     function () {
                         console.error('Error while reading timesheets with error ' + errResponse);
