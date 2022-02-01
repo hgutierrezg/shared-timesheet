@@ -29,8 +29,8 @@ public class TimesheetRepository {
      * @param id The id to retrieve
      * @return An Optional that may or may not contain a Timesheet
      */
-    public Optional<Timesheet> getById(long id) {
-        return this.timesheetList.stream().filter(timesheet -> timesheet.getId() == id).findFirst();
+    public Optional<Timesheet> getById(Long id) {
+        return this.timesheetList.stream().filter(timesheet -> timesheet.getId().equals(id)).findFirst();
     }
 
     /**
@@ -49,8 +49,9 @@ public class TimesheetRepository {
      *
      * @param timesheet The timesheet to insert
      */
-    public void save(Timesheet timesheet) {
+    public void create(Timesheet timesheet) {
         timesheet.setId(counter.incrementAndGet());
+        timesheet.setApproved(Boolean.FALSE);
         this.timesheetList.add(timesheet);
     }
 

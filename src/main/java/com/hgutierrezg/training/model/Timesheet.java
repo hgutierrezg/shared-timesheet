@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Timesheet {
-    private long id;
+    private Long id;
 
     @NonNull
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -30,7 +30,8 @@ public class Timesheet {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDateTime;
-    private boolean approved;
+
+    private Boolean approved;
 
     @Override
     public boolean equals(Object obj) {
@@ -41,7 +42,7 @@ public class Timesheet {
         if (!(obj instanceof Timesheet))
             return false;
         Timesheet other = (Timesheet) obj;
-        return id == other.id;
+        return id.equals(other.id);
     }
 
     public Long getTotalHours() {

@@ -27,7 +27,7 @@
             </td>
             <td class="approveBtn">
                 <button type="button"
-                        ng-if="time.approved == false && timesheetListController.role == 'internalManager'"
+                        ng-if="time.approved == true && timesheetListController.role == 'internalManager'"
                         ng-click="timesheetListController.approve(time)"
                         class="btn btn-success custom-width">Approve
                 </button>

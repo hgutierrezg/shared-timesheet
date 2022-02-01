@@ -30,7 +30,7 @@ public class TimesheetService {
         if (timesheetOptional.isPresent()) {
             timesheetRepository.update(timesheet);
         } else {
-            timesheetRepository.save(timesheet);
+            timesheetRepository.create(timesheet);
         }
         return timesheet;
     }
