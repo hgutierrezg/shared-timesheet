@@ -1,25 +1,27 @@
-<h3><small>Create new timesheet</small></h3>
-<hr>
-<form class="form-inline" ng-submit="timesheetFormController.submit()" name="myForm">
-    <div class="form-group">
-        <label class="sr-only" for="startDateTime">Start Date and Time</label>
-        <input type="datetime-local" id="startDateTime" name="startDateTime"
-               ng-model="timesheetFormController.timesheet.startDateTime"
-               class="form-control" placeholder="yyyy-MM-dd HH:mm:ss"
-               min="2001-01-01T00:00:00" required/>
+<section>
+    <h3><small>Create new timesheet</small></h3>
+    <hr>
+    <form class="form-inline" ng-submit="timesheetFormController.submit()" name="myForm">
+        <div class="form-group">
+            <label class="sr-only" for="startDateTime">Start Date and Time</label>
+            <input type="datetime-local" id="startDateTime" name="startDateTime"
+                   ng-model="timesheetFormController.timesheet.startDateTime"
+                   class="form-control" placeholder="yyyy-MM-dd HH:mm:ss"
+                   min="2001-01-01T00:00:00" required/>
 
-    </div>
-    <div class="form-group">
-        <label class="sr-only" for="endDateTime">End Date and Time</label>
-        <input type="datetime-local" id="endDateTime" name="endDateTime"
-               ng-model="timesheetFormController.timesheet.endDateTime"
-               class="form-control" placeholder="yyyy-MM-dd HH:mm:ss"
-               min="2001-01-01T00:00:00" required/>
-    </div>
-    <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid">Add</button>
-    <button type="button" ng-click="timesheetFormController.reset()"
-            class="btn btn-default">Reset
-    </button>
-</form>
-<br><br>
-<hr>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="endDateTime">End Date and Time</label>
+            <input type="datetime-local" id="endDateTime" name="endDateTime"
+                   ng-model="timesheetFormController.timesheet.endDateTime"
+                   class="form-control" placeholder="yyyy-MM-dd HH:mm:ss"
+                   min="2001-01-01T00:00:00" required/>
+        </div>
+        <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid">Add</button>
+        <button type="button" ng-click="timesheetFormController.reset()"
+                class="btn btn-default">Reset
+        </button>
+    </form>
+    <br><br>
+    <hr>
+</section>
