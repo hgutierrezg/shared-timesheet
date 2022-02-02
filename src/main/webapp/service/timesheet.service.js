@@ -14,13 +14,26 @@ function timesheetService($http) {
     return {
         getAllTimesheets: getAllTimesheets,
         createTimesheet: createTimesheet,
-        updateTimesheet: updateTimesheet
+        updateTimesheet: updateTimesheet,
+        getAllTimesheetsSync: getAllTimesheetsSync
     };
 
     function getAllTimesheets() {
         return $http.get(REST_SERVICE_URI)
             .then(resolveSuccess)
             .catch(resolveError);
+    }
+
+    function getAllTimesheetsSync() {
+        return $http.get(REST_SERVICE_URI)
+            .then((responseData) =>  {
+                console.log('loading sync ');
+                console.log(responseData);
+            })
+            .catch((errorData) =>  {
+                console.log('loading sync error');
+                console.log(errorData);
+            });
     }
 
     function createTimesheet(timesheet) {

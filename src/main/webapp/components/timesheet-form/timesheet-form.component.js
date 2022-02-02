@@ -15,7 +15,7 @@ angular.module('sharedTimesheetApp')
 function TimesheetFormController (timesheetService, $rootScope) {
 
     const timesheetFormController = this;
-    timesheetFormController.timesheet = {startDateTime: '', endDateTime: ''};
+    timesheetFormController.timesheet = {startDateTime: '', endDateTime: '', client: ''};
 
     timesheetFormController.submit = submit;
     timesheetFormController.reset = reset;
@@ -40,7 +40,8 @@ function TimesheetFormController (timesheetService, $rootScope) {
     function reset() {
         timesheetFormController.timesheet = {
             startDateTime: '',
-            endDateTime: ''
+            endDateTime: '',
+            client: ''
         };
     }
 

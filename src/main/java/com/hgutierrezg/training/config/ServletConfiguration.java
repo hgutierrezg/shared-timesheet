@@ -4,8 +4,6 @@ import javax.servlet.Filter;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import filters.CorsFilter;
-
 public class ServletConfiguration extends AbstractAnnotationConfigDispatcherServletInitializer {
 	  
     @Override
@@ -22,10 +20,4 @@ public class ServletConfiguration extends AbstractAnnotationConfigDispatcherServ
     protected String[] getServletMappings() {
         return new String[] { "/" };
     }
-     
-    @Override
-    protected Filter[] getServletFilters() {
-        return new CorsFilter[]{new CorsFilter()};
-    }
-  
 }

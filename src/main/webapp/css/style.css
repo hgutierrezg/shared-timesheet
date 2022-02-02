@@ -17,6 +17,10 @@ a:active {
     width: 60px;
 }
 
+.form-inline .form-group {
+    margin-right:20px;
+}
+
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
     .sidenav {

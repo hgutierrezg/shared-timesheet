@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.IntStream;
 
 /**
  * Class to represent a repository with an in-memory database stored in List<Timesheet> timesheetList
@@ -61,8 +63,10 @@ public class TimesheetRepository {
      */
     public void update(Timesheet timesheet) {
         getById(timesheet.getId()).ifPresent(foundTimesheet -> {
-            int index = this.timesheetList.indexOf(timesheet);
-            this.timesheetList.set(index, timesheet);
+            IntStream.range(0, timesheetList.size())
+                    .filter(i -> foundTimesheet.getId().equals(timesheetList.get(i).getId()))
+                    .findFirst()
+                    .ifPresent(consumer -> this.timesheetList.set(consumer, timesheet));
         });
     }
 

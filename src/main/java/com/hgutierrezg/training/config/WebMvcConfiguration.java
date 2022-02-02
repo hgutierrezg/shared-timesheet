@@ -15,7 +15,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/");
         viewResolver.setSuffix("/index.html");
         registry.viewResolver(viewResolver);
     }
