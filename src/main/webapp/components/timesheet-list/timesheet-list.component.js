@@ -11,7 +11,7 @@ angular.module('sharedTimesheetApp')
             templateUrl: 'components/timesheet-list/timesheet-list.html',
             controllerAs: 'timesheetListController',
             bindings: {
-                role: '<',
+                permission: '<',
             }
         });
 
