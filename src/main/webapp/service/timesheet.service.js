@@ -14,8 +14,7 @@ function timesheetService($http) {
     return {
         getAllTimesheets: getAllTimesheets,
         createTimesheet: createTimesheet,
-        updateTimesheet: updateTimesheet,
-        getAllTimesheetsSync: getAllTimesheetsSync
+        updateTimesheet: updateTimesheet
     };
 
     function getAllTimesheets() {

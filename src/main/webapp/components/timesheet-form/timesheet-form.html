@@ -3,24 +3,20 @@
     <hr>
     <form class="form-inline my-2 my-lg-0" ng-submit="timesheetFormController.submit()" name="createForm">
         <div class="form-group">
-            <label class="text" for="startDateTime">Start Date and Time</label>
+            <label class="text" for="startDateTime">From:</label>
             <input type="datetime-local" id="startDateTime" name="startDateTime"
                    ng-model="timesheetFormController.timesheet.startDateTime"
                    class="form-control" placeholder="yyyy-MM-dd HH:mm:ss"
                    min="2001-01-01T00:00:00" required/>
-
         </div>
 
-
         <div class="form-group">
-            <label class="text" for="endDateTime">End Date and Time</label>
+            <label class="text" for="endDateTime">To:</label>
             <input type="datetime-local" id="endDateTime" name="endDateTime"
                    ng-model="timesheetFormController.timesheet.endDateTime"
                    class="form-control" placeholder="yyyy-MM-dd HH:mm:ss"
                    min="2001-01-01T00:00:00" required/>
         </div>
-
-        <div></div>
 
         <div class="form-group">
             <label class="text" for="client">Client</label>
@@ -28,7 +24,6 @@
                    ng-model="timesheetFormController.timesheet.client"
                    class="form-control" placeholder="Client Name"/>
         </div>
-        <div></div>
 
         <button type="submit" class="btn btn-success" ng-disabled="createForm.$invalid">Add</button>
         <button type="button" ng-click="timesheetFormController.reset()"
