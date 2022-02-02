@@ -27,7 +27,7 @@ function LoginController (loginService, $rootScope) {
     }
 
     /**
-     * Function to emitted to the root scope that a user was logged in
+     * Function to broadcast to the root scope that a user was logged in
      * Any controller listening from each scope will be able to capture it
      */
     function userLoggedIn() {

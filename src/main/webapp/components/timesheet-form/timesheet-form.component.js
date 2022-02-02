@@ -46,7 +46,7 @@ function TimesheetFormController (timesheetService, $rootScope) {
     }
 
     /**
-     * Function to emitted to the root scope that a new time sheet was created.
+     * Function to broadcast to the root scope that a new time sheet was created.
      * Any controller listening from each scope will be able to capture it
      */
     function timesheetCreated() {
