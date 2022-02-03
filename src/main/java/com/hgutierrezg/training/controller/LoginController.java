@@ -1,20 +1,24 @@
 package com.hgutierrezg.training.controller;
 
 import com.hgutierrezg.training.dto.CredentialsDto;
-import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
-@RequestMapping("/login")
-@AllArgsConstructor
+@Controller
 public class LoginController {
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> login(@RequestBody CredentialsDto credentialsDto) {
-
-        // Always return success if the CredentialsDto validations pass
-        return ResponseEntity.ok().build();
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
+        return "loginPage";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView getHomepage(@ModelAttribute CredentialsDto credentialsDto){
+        ModelAndView indexMaV = new ModelAndView("dashboardPage");
+        indexMaV.addObject("credentialsDto", credentialsDto);
+        return indexMaV;
+    }
+
 }
