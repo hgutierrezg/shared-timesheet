@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <title>Shared Timesheet</title>
     <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 
     <script>
         document.write('<base href="' + document.location + '" />');
@@ -23,9 +23,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- Project modules -->
-    <script src="app.module.js"></script>
-    <script src="service/timesheet.service.js"></script>
-    <script src="controller/dashboard.controller.js"></script>
+    <script src="static/app.module.js"></script>
+    <script src="static/service/timesheet.service.js"></script>
+    <script src="static/controller/dashboard.controller.js"></script>
 </head>
 
 <body ng-app="sharedTimesheetApp" >
