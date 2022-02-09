@@ -14,7 +14,8 @@ function timesheetService($http) {
     return {
         getAllTimesheets: getAllTimesheets,
         createTimesheet: createTimesheet,
-        updateTimesheet: updateTimesheet
+        updateTimesheet: updateTimesheet,
+        deleteTimesheet: deleteTimesheet
     };
 
     function getAllTimesheets() {
@@ -34,6 +35,13 @@ function timesheetService($http) {
             .then(resolveSuccess)
             .catch(resolveError);
     }
+
+    function deleteTimesheet(id) {
+        return $http.delete(REST_SERVICE_URI + id)
+            .then(resolveSuccess)
+            .catch(resolveError);
+    }
+
 
     function resolveSuccess(response) {
         return Promise.resolve(response.data);

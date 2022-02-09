@@ -33,4 +33,10 @@ public class SharedTimesheetController {
         timesheetService.updateTimesheet(timesheetDto);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteTimesheet(@PathVariable Long id) {
+        timesheetService.deleteTimesheet(id);
+        return ResponseEntity.ok().build();
+    }
 }
