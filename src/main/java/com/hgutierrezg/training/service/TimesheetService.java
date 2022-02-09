@@ -1,21 +1,20 @@
 package com.hgutierrezg.training.service;
 
 import com.hgutierrezg.training.dto.TimesheetDto;
-import com.hgutierrezg.training.model.Timesheet;
+import com.hgutierrezg.training.mapper.TimesheetObjectMapper;
+import com.hgutierrezg.training.model.TimesheetEntity;
 import com.hgutierrezg.training.repository.TimesheetRepository;
 import lombok.AllArgsConstructor;
-import com.hgutierrezg.training.mapper.TimesheetObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class TimesheetService {
-    private final TimesheetRepository timesheetRepository;
     private final TimesheetObjectMapper timesheetObjectMapper;
+    private final TimesheetRepository timesheetRepository;
 
     public Long createTimesheet(TimesheetDto timesheetDto) {
         return this.upsert(timesheetDto).getId();
@@ -26,21 +25,19 @@ public class TimesheetService {
     }
 
     public List<TimesheetDto> getTimesheets() {
-        List<Timesheet> timesheets = timesheetRepository.getAll();
+        List<TimesheetEntity> timesheets = timesheetRepository.getAll();
         return timesheets.stream()
-                .map(timesheetObjectMapper::timesheetToTimesheetDto)
+                .map(timesheetObjectMapper::timesheetEntityToTimesheetDto)
                 .collect(Collectors.toList());
     }
 
-    private Timesheet upsert(TimesheetDto timesheetDto) {
-        Timesheet timesheet = timesheetObjectMapper.timesheetDtoToTimesheet(timesheetDto);
-        Optional<Timesheet> timesheetOptional = timesheetRepository.getById(timesheet.getId());
-        if (timesheetOptional.isPresent()) {
-            timesheetRepository.update(timesheet);
-        } else {
-            timesheetRepository.create(timesheet);
-        }
-        return timesheet;
+    public void deleteTimesheet(Long id) {
+        timesheetRepository.deleteEntity(id);
     }
 
+    private TimesheetEntity upsert(TimesheetDto timesheetDto) {
+        TimesheetEntity timesheet = timesheetObjectMapper.timesheetDtoToTimesheetEntity(timesheetDto);
+        timesheetRepository.saveEntity(timesheet);
+        return timesheet;
+    }
 }

@@ -1,19 +1,18 @@
 'use strict';
-angular.module('sharedTimesheetApp').
- controller('DashboardController', ['timesheetService', function(timesheetService)
-{
+angular.module('sharedTimesheetApp').controller('DashboardController', ['timesheetService', function (timesheetService) {
     const dashboardController = this;
-    dashboardController.role = 'employee';
+    dashboardController.userRole = 'employee';
     dashboardController.timesheets = [];
-    dashboardController.timesheet = {startDateTime: '', endDateTime: '', client: ''};
+    dashboardController.timesheet = {startDate: '', endDate: '', client: ''};
 
     dashboardController.submit = submit;
     dashboardController.reset = reset;
     dashboardController.approve = approve;
     dashboardController.menuSelection = menuSelection;
-
+    dashboardController.deleteTimesheet = deleteTimesheet;
 
     getAllTimesheets();
+
     function getAllTimesheets() {
         timesheetService.getAllTimesheets()
             .then(
@@ -41,13 +40,23 @@ angular.module('sharedTimesheetApp').
         updateTimesheet(timesheet);
     }
 
+    function deleteTimesheet(timesheet) {
+        timesheetService.deleteTimesheet(timesheet.id)
+            .then(
+                getAllTimesheets,
+                function (errResponse) {
+                    console.error('Error while deleting timesheet with error ' + errResponse);
+                }
+            );
+    }
+
     function menuSelection(selected) {
-        dashboardController.role = selected;
+        dashboardController.userRole = selected;
     }
 
     function createTimesheet(timesheet) {
-        timesheet.startDateTime = new Date(timesheet.startDateTime).toLocaleString("sv-SE");
-        timesheet.endDateTime = new Date(timesheet.endDateTime).toLocaleString("sv-SE");
+        timesheet.startDate = new Date(timesheet.startDate).toLocaleString("sv-SE");
+        timesheet.endDate = new Date(timesheet.endDate).toLocaleString("sv-SE");
         timesheetService.createTimesheet(timesheet)
             .then(
                 getAllTimesheets,
@@ -64,8 +73,8 @@ angular.module('sharedTimesheetApp').
 
     function reset() {
         dashboardController.timesheet = {
-            startDateTime: '',
-            endDateTime: '',
+            startDate: '',
+            endDate: '',
             client: ''
         };
     }

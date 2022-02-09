@@ -1,4 +1,4 @@
-package com.hgutierrezg.training.model;
+package com.hgutierrezg.training.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

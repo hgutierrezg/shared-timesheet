@@ -1,91 +1,46 @@
 package com.hgutierrezg.training.repository;
 
-import com.hgutierrezg.training.model.Timesheet;
+import com.hgutierrezg.training.model.TimesheetEntity;
+import lombok.AllArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.IntStream;
 
-/**
- * Class to represent a repository with an in-memory database stored in List<Timesheet> timesheetList
- */
+@AllArgsConstructor
 @Repository
+@Transactional
 public class TimesheetRepository {
-    private final AtomicLong counter;
-    private final List<Timesheet> timesheetList;
 
-    public TimesheetRepository() {
-        this.counter = new AtomicLong();
-        this.timesheetList = MockedTimesheetsBuilder();
-    }
+    private final SessionFactory sessionFactory;
 
-    /**
-     * Retrieves a Timesheet by its id
-     * Equivalent to SELECT * FROM timesheet WHERE id=id;
-     *
-     * @param id The id to retrieve
-     * @return An Optional that may or may not contain a Timesheet
-     */
-    public Optional<Timesheet> getById(Long id) {
-        return this.timesheetList.stream().filter(timesheet -> timesheet.getId().equals(id)).findFirst();
-    }
-
-    /**
-     * Retrieves all Timesheet available
-     * Equivalent to SELECT * FROM timesheet;
-     *
-     * @return A collection of Timesheet
-     */
-    public List<Timesheet> getAll() {
-        return this.timesheetList;
-    }
-
-    /**
-     * Stores a new Timesheet
-     * Equivalent to INSERT INTO timesheet VALUES ...;
-     *
-     * @param timesheet The timesheet to insert
-     */
-    public void create(Timesheet timesheet) {
-        timesheet.setId(counter.incrementAndGet());
-        timesheet.setApproved(Boolean.FALSE);
-        this.timesheetList.add(timesheet);
-    }
-
-    /**
-     * Updates a timesheet if and only if is found by id
-     * @param timesheet The timesheet to update
-     */
-    public void update(Timesheet timesheet) {
-        getById(timesheet.getId()).ifPresent(foundTimesheet -> {
-            IntStream.range(0, timesheetList.size())
-                    .filter(i -> foundTimesheet.getId().equals(timesheetList.get(i).getId()))
-                    .findFirst()
-                    .ifPresent(consumer -> this.timesheetList.set(consumer, timesheet));
-        });
-    }
-
-    /**
-     * Method to ingest values into the in memory list acting as a repository
-     *
-     * @return A collection of Timesheet
-     */
-    private List<Timesheet> MockedTimesheetsBuilder() {
-        List<Timesheet> timesheets = new ArrayList<>();
-        for (int i = 0; i <= 3; i++) {
-            Timesheet timesheet = Timesheet.builder()
-                    .id(counter.incrementAndGet())
-                    .approved(false)
-                    .startDateTime(LocalDateTime.of(2022, 1, i + 3, 0, 0))
-                    .endDateTime(LocalDateTime.of(2022, 1, i + 7, 0, 0))
-                    .build();
-            timesheets.add(timesheet);
+    public Optional<TimesheetEntity> getById(Long id) {
+        if (id != null) {
+            // With javax persistence api since criteria query is depreacted from hibernate 5
+            TimesheetEntity timesheetEntity = getCurrentSession().find(TimesheetEntity.class, id);
+            return Optional.of(timesheetEntity);
         }
-        return timesheets;
+        return Optional.empty();
+    }
+
+    public List<TimesheetEntity> getAll() {
+        //HQL query
+        return getCurrentSession().createQuery("SELECT timesheetEntity FROM TimesheetEntity timesheetEntity", TimesheetEntity.class).getResultList();
+    }
+
+    public void saveEntity(TimesheetEntity entity) {
+        getCurrentSession().saveOrUpdate(entity);
+    }
+
+    public void deleteEntity(Long id) {
+        TimesheetEntity entity = getById(id).get();
+        getCurrentSession().delete(entity);
+    }
+
+    protected Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
     }
 }
