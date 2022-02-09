@@ -19,7 +19,7 @@ public class TimesheetRepository {
 
     public Optional<TimesheetEntity> getById(Long id) {
         if (id != null) {
-            // With javax persistence api since criteria query is depreacted from hibernate 5
+            // With javax persistence api since criteria query is deprecated from hibernate 5
             TimesheetEntity timesheetEntity = getCurrentSession().find(TimesheetEntity.class, id);
             return Optional.of(timesheetEntity);
         }
