@@ -36,8 +36,8 @@ public class TimesheetRepository {
     }
 
     public void deleteEntity(Long id) {
-        TimesheetEntity entity = getById(id).get();
-        getCurrentSession().delete(entity);
+        Optional<TimesheetEntity> optionalTimesheetEntity =  getById(id);
+        optionalTimesheetEntity.ifPresent(timesheetEntity -> getCurrentSession().delete(timesheetEntity));
     }
 
     protected Session getCurrentSession() {
