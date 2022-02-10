@@ -17,27 +17,27 @@ public class TimesheetService {
     private final TimesheetRepository timesheetRepository;
 
     public Long createTimesheet(TimesheetDto timesheetDto) {
-        return this.upsert(timesheetDto).getId();
+        return this.save(timesheetDto).getId();
     }
 
     public void updateTimesheet(TimesheetDto timesheetDto) {
-        this.upsert(timesheetDto);
+        this.save(timesheetDto);
     }
 
     public List<TimesheetDto> getTimesheets() {
-        List<TimesheetEntity> timesheets = timesheetRepository.getAll();
+        List<TimesheetEntity> timesheets = timesheetRepository.findAll();
         return timesheets.stream()
                 .map(timesheetObjectMapper::timesheetEntityToTimesheetDto)
                 .collect(Collectors.toList());
     }
 
     public void deleteTimesheet(Long id) {
-        timesheetRepository.deleteEntity(id);
+        timesheetRepository.deleteById(id);
     }
 
-    private TimesheetEntity upsert(TimesheetDto timesheetDto) {
+    private TimesheetEntity save(TimesheetDto timesheetDto) {
         TimesheetEntity timesheet = timesheetObjectMapper.timesheetDtoToTimesheetEntity(timesheetDto);
-        timesheetRepository.saveEntity(timesheet);
+        timesheetRepository.save(timesheet);
         return timesheet;
     }
 }
