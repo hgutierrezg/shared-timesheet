@@ -7,6 +7,7 @@
     Create
     Update
     Delete
+    Get all
 
 ## Assumptions
 
