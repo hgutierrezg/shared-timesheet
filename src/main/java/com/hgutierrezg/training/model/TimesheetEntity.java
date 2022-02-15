@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Table(name = "timesheet")
 public class TimesheetEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "start_date")
