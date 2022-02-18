@@ -1,4 +1,4 @@
-package com.hgutierrezg.training.exceptions;
+package com.hgutierrezg.training.exception;
 
 import com.hgutierrezg.training.dto.ApiError;
 import lombok.extern.slf4j.Slf4j;
