@@ -39,27 +39,27 @@ public class TimesheetServiceTest {
     }
 
     @Test
-    public void givenAllParameters_callCreate_thenRepoSaveInvoked() {
+    public void givenAllParameters_whenCallCreate_thenRepoSaveInvoked() {
         timesheetService.createTimesheet(timesheetDto);
         Mockito.verify(timesheetRepository).save(Mockito.any(TimesheetEntity.class));
     }
 
     @Test(expectedExceptions = NullPointerException.class)
-    public void givenNoStartDateProvided_callCreate_thenRepoSaveNotInvoked() {
+    public void givenNoStartDateProvided_whenCallCreate_thenRepoSaveNotInvoked() {
         timesheetDto.setStartDate(null);
         timesheetService.createTimesheet(timesheetDto);
         Mockito.verify(timesheetRepository, Mockito.times(0)).save(Mockito.any(TimesheetEntity.class));
     }
 
     @Test
-    public void givenAllParameters_callUpdate_thenRepoSaveInvoked() {
+    public void givenAllParameters_whenCallUpdate_thenRepoSaveInvoked() {
         timesheetDto.setId(1L);
         timesheetService.updateTimesheet(timesheetDto);
         Mockito.verify(timesheetRepository, Mockito.atMost (2)).save(Mockito.any(TimesheetEntity.class));
     }
 
     @Test(expectedExceptions = InvalidRequestException.class)
-    public void givenNoIdProvided_callUpdate_thenRepoSaveNotInvoked() {
+    public void givenNoIdProvided_whenCallUpdate_thenRepoSaveNotInvoked() {
         timesheetDto.setId(null);
         timesheetService.updateTimesheet(timesheetDto);
         Mockito.verify(timesheetRepository, Mockito.times(0)).save(Mockito.any(TimesheetEntity.class));
@@ -80,13 +80,13 @@ public class TimesheetServiceTest {
     }
 
     @Test
-    public void givenIdNotProvided_callDelete_thenRepoDeleteInvoked() {
+    public void givenIdNotProvided_whenCallDelete_thenRepoDeleteInvoked() {
         timesheetService.deleteTimesheet(1L);
         Mockito.verify(timesheetRepository, Mockito.atMost (1)).deleteById(Mockito.any(Long.class));
     }
 
     @Test(expectedExceptions = InvalidRequestException.class)
-    public void givenIdNotProvided_callDelete_thenRepoDeleteNotInvoked() {
+    public void givenIdNotProvided_whenCallDelete_thenRepoDeleteNotInvoked() {
         timesheetService.deleteTimesheet(null);
         Mockito.verify(timesheetRepository, Mockito.times(0)).deleteById(Mockito.any(Long.class));
     }
